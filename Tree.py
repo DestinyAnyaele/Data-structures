@@ -31,29 +31,22 @@ class Tree:
         if not self.switch:
             raise ValueError("parent not found")
 
-    def Display(self) -> list:
+    def Display(self) -> dict:
         # Display is the main function for intial tree;only loops through the initial parents/nodes
-        def Recursive(node, temp):
+        def Recursive(node) -> dict:
             # This function recursively moves through the tree to find a child(list)
+            result = {}
             for i in node.child:
                 if i.child:
-                    temp[i.value] = {}
-                    Recoil(i, temp)
+                    result[i.value] = Recursive(i)
                 else:
-                    temp[i.value] = None
-
-        def Recoil(test, result):
-            # This function moves to the last/latest child in result for addition to dict
-            for i, k in result.items():
-                if isinstance(k, dict):
-                    if i == test.value:
-                        Recursive(test, result[i])
+                    result[i.value] = None
+            return result
 
         result = {}
         for node in self.tree:
             if node.child:
-                result[node.value] = {}
-                Recoil(node, result)
+                result[node.value] = Recursive(node)
             else:
                 result[node.value] = None
         return result
@@ -67,8 +60,4 @@ obj1.Add(66, 34)
 obj1.Add(666, 66)
 obj1.Add("wat", 666)
 obj1.Add("war")
-
-import pprint
-
-pprint.pprint(obj1.Display(), indent=2, width=4, depth=True)
 print(obj1.Display())

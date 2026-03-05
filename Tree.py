@@ -8,27 +8,23 @@ class Node:
 class Tree:
     def __init__(self):
         self.tree = []
-        self.switch = False
 
     def Add(self, element: any, parentValue=None) -> None:
-        def Recursive(self, va: list) -> bool | None:
+        def Recursive(va: list) -> bool:
+            found = False
             for node in va:
-                if self.switch:
-                    break
-                if node.value == self.parentValue:
-                    node.child.append(Node(self.element, node))
-                    self.switch = True
+                if node.value == parentValue:
+                    node.child.append(Node(element, node))
+                    return True
                 elif node.child:
-                    Recursive(self, node.child)
+                    found = Recursive(node.child)
+            return found
 
-        self.element = element
-        self.parentValue = parentValue
-        self.switch = False
         if parentValue is None:
             return self.tree.append(Node(element))
         else:
-            Recursive(self, self.tree)
-        if not self.switch:
+            found = Recursive(self.tree)
+        if not found:
             raise ValueError("parent not found")
 
     def Display(self) -> dict:

@@ -44,8 +44,10 @@ class PriorityQueue:
   """
 
 
+from heapq import heappop, heappush, heapify
+
+
 class PQueue:  # a more optimized version
-    from heapq import heappop, heappush, heapify
 
     def __init__(self):
         self.queue = []

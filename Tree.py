@@ -46,14 +46,3 @@ class Tree:
             else:
                 result[node.value] = None
         return result
-
-
-obj1 = Tree()
-obj1.Add(2)
-obj1.Add(1)
-obj1.Add(34, 1)
-obj1.Add(66, 34)
-obj1.Add(666, 66)
-obj1.Add("wat", 666)
-obj1.Add("war")
-print(obj1.Display())
